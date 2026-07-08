@@ -1,76 +1,90 @@
-# 🔁 loop-maker — write loops, not prompts
+<div align="center">
 
-**Stop babysitting your AI. Tell it what you want, walk away, come back to finished work.**
+<img src="assets/loop-maker-banner.png" alt="Loop Maker — write loops, not prompts. Autonomous overnight AI coding runs for Claude Code, Codex, and Cursor." width="100%" />
 
-This is a free skill for Claude Code (and it works with Codex, Cursor, and other AI agents too). You describe what you want in plain English, and it writes you a complete, *safe* autonomous run — a master prompt, a plan, a checker, and one command to launch it. The same pattern people are using to ship apps overnight and even have an AI build an entire company in one 4-hour run.
+# 🔁 Loop Maker
 
-Built on the loop-engineering playbook: Anthropic's own long-running-agent research, the Ralph Wiggum loop, and the plan-delegate-review method (the smart model manages, cheaper models build — that's how a whole company costs ~500K orchestrator tokens instead of millions).
+**The master prompt engineer for overnight autonomous AI runs.**
+Tell it what you want in plain English. It writes the whole run: master prompt, plan, verifier, one command. You go to sleep. The AI ships.
 
-Made by James (@ EveryThingAI). If you got this from my Instagram — enjoy. 🙏
+[![Free Skill](https://img.shields.io/badge/skill-100%25%20free-22c55e?style=for-the-badge)](https://github.com/jbrazy480/loop-maker)
+[![Works With](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20Antigravity-3b82f6?style=for-the-badge)](#-install-in-60-seconds)
+[![Community](https://img.shields.io/badge/community-Evolving%20AI%20Hub-f97316?style=for-the-badge)](https://www.skool.com/evolving-ai-hub)
 
----
+**⭐ Star this repo** if your AI ships while you sleep · Built by [James @ EveryThingAI](https://evrythingai.com)
 
-## 📦 Install — 3 steps, ~60 seconds (no tech skills needed)
-
-You need **Claude Code** installed first (the AI coding tool from Anthropic — free to start at https://claude.com/claude-code). Once you have it:
-
-**1. Find your skills folder.** Open this location (copy-paste it):
-```
-~/.claude/skills/
-```
-- On Mac: open Finder → press `Cmd+Shift+G` → paste `~/.claude/skills/` → Enter. (If the `skills` folder doesn't exist, create a folder named `skills` inside the `.claude` folder.)
-- On Windows: it's at `C:\Users\YOUR-NAME\.claude\skills\`
-
-**2. Drop the whole `loop-maker` folder into it.** So you end up with:
-```
-~/.claude/skills/loop-maker/
-```
-
-**3. Restart Claude Code** (close it and open it again). Done. ✅
+</div>
 
 ---
 
-## ▶️ How to use it
+## Why this exists
 
-Open Claude Code and type the word **loop**, then say what you want. Examples:
+Everyone prompts AI coding agents one message at a time, babysitting every step. Then the agent stops after ten minutes, or worse, *says* it's done when it isn't.
 
-> **loop** — build me a landing page for my coffee shop, make it look good on a phone
+The people getting real results stopped writing prompts. They write **loops**: a spec that pins the work, a checker that isn't the writer, and a finish line the agent can actually prove. That's how a single goal prompt built an entire company overnight (product, brand, landing page, launch videos) for about 500K orchestrator tokens, and how practitioners run 7, 9, even 15-hour autonomous Claude Code sessions that ship.
 
-> **loop** — add a login screen to my app and don't stop until the tests pass
+Loop Maker packages that entire playbook — Anthropic's long-running-agent research, the Ralph Wiggum loop, spec-driven development, plan-delegate-review orchestration — into one skill. You describe the goal. It engineers the run.
 
-> **loop** — run all night: build me a complete company from scratch, launch video and all
+<img src="assets/night-shift.png" alt="AI agent working overnight — orchestrator delegating to worker agents in Claude Code" width="100%" />
 
-It will then:
-1. Ask a couple quick questions, one at a time (only if it needs to)
-2. Write your **master prompt file** — mission, guardrails, phases, and a real definition of done
-3. Write the **plan files** — a feature list the AI checks off, and a progress file so nothing gets lost
-4. Set up the **checker** — the AI has to prove its work with evidence, never just say "done"
-5. Hand you **one command to paste** — then you walk away
+## What you get from one word
 
-That's it. You're not prompting anymore. You're running a loop.
+Type `loop`, answer a few questions (one at a time), and it generates:
 
----
-
-## ✅ Why it won't make garbage while you sleep
-
-Every run it writes has the three things that keep an overnight run from going off the rails:
-
-| Part | What it does for you |
+| File | What it does |
 |---|---|
-| **The Spec (the pin)** | Stops the AI from inventing stuff you didn't ask for |
-| **The Checker (not the writer)** | The AI can't just *say* it's done — it has to prove it with evidence |
-| **The Stop Condition** | A real finish line plus a hard cap, so it actually stops |
+| **Master prompt** (`MISSION.md` / `BUILD-LOOP.md`) | The agent's full instruction set: mission, guardrails, never-ask autonomy rules, orchestration playbook, definition of done |
+| **`feature_list.json`** | Every feature with verify steps and `"passes": false` — the agent can't declare victory early |
+| **`loop/PROGRESS.md`** | Decision log + honesty buckets (done / blocked / cut) — survives crashes and context limits |
+| **`AGENTS.md`** | Portable rules file read natively by Codex, Cursor, Gemini, Copilot (+ Claude Code via one line) |
+| **The launch command** | One thing to paste. Then you walk away. |
 
-Plus the rules the pros converged on: never ask the human (decide, log it, keep moving) · no placeholder work · never touch the tests to make them pass · one item at a time · everything saved to files so a crash loses nothing · nothing gets published, deployed, or spent from inside a loop.
+## ⚡ Install in 60 seconds
 
-**One honest rule it always tells you:** review the work in the morning. The loop does the building; you stay the boss.
+### Claude Code (full skill — recommended)
+Drop the [`loop-maker/`](loop-maker/) folder into `~/.claude/skills/`, restart Claude Code, then type **`loop`** + what you want. Full instructions: [loop-maker/README.md](loop-maker/README.md)
+
+### Slash command (Claude Code · Codex · Cursor · Antigravity)
+One file, [`commands/loop.md`](commands/loop.md), works everywhere:
+
+| Agent | Put it here | Then type |
+|---|---|---|
+| **Claude Code** | `~/.claude/commands/loop.md` | `/loop` |
+| **Codex CLI** | `~/.codex/prompts/loop.md` | `/loop` |
+| **Cursor** | `.cursor/commands/loop.md` | `/loop` |
+| **Antigravity / anything else** | anywhere in the repo | "Read commands/loop.md and follow it" |
+
+## The method (what makes the runs actually finish)
+
+**Three parts, non-negotiable.** The Spec pins exactly what to build and what's out of scope. The Verifier is never the writer — tests, screenshots, or a fresh-context skeptic grade the work. The Stop Condition is provable, with a hard turn/time cap.
+
+**Plan, delegate, review.** The smart model never builds. It orchestrates cheaper worker models — fan-out researchers, tournaments with judge panels, adversarial skeptics, a completeness critic before any phase counts as done. Same results, fraction of the cost.
+
+**Never ask, always log.** The agent doesn't stop to ask questions at 3 AM. It decides with research, logs the question + answer + why in a Decision Log, and keeps moving. Blocked after three attempts? It ships the strong 80% and tells you exactly what got cut. Blocked is never dressed up as done.
+
+**Evidence, not vibes.** Every "it works" comes with the test output, the command result, or the screenshot — verified from the source of truth, never a green badge.
+
+The full playbook lives in [`loop-maker/references/`](loop-maker/references/): [orchestration patterns](loop-maker/references/orchestration-patterns.md) · [17 documented failure modes and their guardrails](loop-maker/references/failure-modes.md) · [the five-gate thinking method](loop-maker/references/fable-method.md) · [launch commands per platform](loop-maker/references/run-commands.md).
+
+## FAQ
+
+**Is this safe to run overnight?** Every generated loop is scoped to one folder/branch, can't push, deploy, publish, send, or spend, and carries a hard cap. The morning review is part of the method: the loop builds, you stay the boss.
+
+**Does it only work for code?** No. Build mode handles features, refactors, bug hunts, migrations, content batches. Venture mode runs the full pipeline: hunt for real pain → tournament-pick the winner → design the business → build brand + product → launch videos → red team → packaged recap.
+
+**What does an overnight run cost?** On a Claude subscription, the plan-delegate-review pattern is the whole trick: the expensive model only orchestrates, cheap models do the building. Scope tight, cap turns, review in the morning.
 
 ---
 
-## ❓ Stuck?
+<div align="center">
 
-- "I don't have Claude Code" → get it free: https://claude.com/claude-code
-- "I can't find the .claude folder" → it's hidden; on Mac use `Cmd+Shift+G` in Finder and paste `~/.claude`
-- "It's not working" → make sure the folder is exactly `~/.claude/skills/loop-maker/` and you restarted Claude Code
+## 🚀 Go deeper
 
-Want the system that runs your whole business this way (not just code)? → **evrythingai.com**
+**[Join Evolving AI Hub on Skool](https://www.skool.com/evolving-ai-hub)** — the community where we drop every skill, prompt system, and build like this one, free.
+
+**Want this level of AI systems installed across your whole business?**
+That's literally what we do — [**evrythingai.com**](https://evrythingai.com)
+
+*Loop Maker by James @ EveryThingAI · MIT License · PRs welcome*
+
+</div>

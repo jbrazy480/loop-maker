@@ -72,5 +72,8 @@ Plus the rules the pros converged on: never ask the human (decide, log it, keep 
 - "I don't have Claude Code" → get it free: https://claude.com/claude-code
 - "I can't find the .claude folder" → it's hidden; on Mac use `Cmd+Shift+G` in Finder and paste `~/.claude`
 - "It's not working" → make sure the folder is exactly `~/.claude/skills/loop-maker/` and you restarted Claude Code
+- Anything else → ask in the free community: **https://www.skool.com/evolving-ai-hub**
+
+🎓 **Join Evolving AI Hub on Skool** for every skill and prompt system we drop: **https://www.skool.com/evolving-ai-hub**
 
 Want the system that runs your whole business this way (not just code)? → **evrythingai.com**
