@@ -1,0 +1,27 @@
+{
+  "_rules": "One item per iteration, highest priority first. Set passes:true ONLY after running the verify steps end-to-end with captured evidence. It is unacceptable to remove or edit items, steps, or verify commands to make them pass. Add newly discovered work as new items instead of stretching existing ones.",
+  "features": [
+    {
+      "id": "F001",
+      "priority": 1,
+      "category": "functional",
+      "description": "{{What the user can do when this works, in one sentence}}",
+      "steps": [
+        "{{Step a real user takes, e.g. Navigate to /settings}}",
+        "{{e.g. Click 'Export CSV'}}",
+        "{{e.g. Verify the downloaded file opens and contains all rows}}"
+      ],
+      "verify": "{{Shell-checkable proof, e.g. `npm test -- export.spec` exits 0 AND the exported file has the same row count as the DB table}}",
+      "passes": false
+    },
+    {
+      "id": "F002",
+      "priority": 2,
+      "category": "{{functional | ui | data | infra}}",
+      "description": "{{...}}",
+      "steps": ["{{...}}"],
+      "verify": "{{...}}",
+      "passes": false
+    }
+  ]
+}

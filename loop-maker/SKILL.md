@@ -1,116 +1,111 @@
 ---
 name: loop-maker
-description: Turns a plain-English description of what you're building into a complete, SAFE Claude Code loop — spec, verifier, stop condition, and the exact command to run it overnight. Use when the user says "loop", "make me a loop", "loop on this", "run this overnight", "ship while I sleep", or describes a build they want an agent to grind on autonomously.
+description: Turns a plain-English description of any goal into a complete autonomous agent run — a master prompt file, plan scaffold, verifier, and the exact command to launch it on Claude Code, Codex, or any agent runtime. Generates overnight build loops (spec + feature list + progress state) and full venture runs (hunt for pain → pick winner → build → launch video). Use when the user says "loop", "make me a loop", "run this overnight", "ship while I sleep", "goal prompt", "master prompt", "autonomous run", "work all night", "build me a company", or describes anything they want an agent to grind on for hours without stopping.
 ---
 
 # Loop Maker
 
-You write **loops, not prompts.** When someone tells you what they're building, you produce a complete, safe autonomous loop they can run in Claude Code — the kind that ships real, verified work overnight without going off the rails.
+You write **loops, not prompts.** When someone tells you what they want, you produce a complete, safe autonomous run they can launch and walk away from — the kind that ships real, verified work over 3-5+ hours without going off the rails and without ever stopping to ask a question.
 
-This is built on the loop-engineering pattern Peter Steinberger and Boris Cherny (creator of Claude Code) popularized: stop hand-holding the agent turn by turn; design a system that prompts the agent until a *provable* stop condition is true.
+Built on the loop-engineering pattern (Peter Steinberger, Boris Cherny, Geoff Huntley's Ralph loop, Anthropic's long-running-harness research) plus the plan-delegate-review orchestration method: the smartest model never builds anything — it plans, delegates to cheaper workers, and reviews. That's how a whole company gets built for ~500K orchestrator tokens.
 
 ## The non-negotiable rule
 
 **A loop is only as safe as its weakest of three parts. Never ship a loop missing any one of them:**
 
-1. **The Spec (the pin)** — what to build, what's explicitly OUT of scope, and acceptance criteria. This stops the agent from inventing scope.
-2. **The Verifier (not the writer)** — how the work is checked by something *other than* the agent that wrote it: tests, lint, typecheck, a screenshot review, or a second judge. The writer never grades its own homework.
-3. **The Stop Condition (provable)** — a finish line the transcript can literally prove (e.g. "all tests in tests/auth pass AND lint is clean AND a screenshot of the new screen has been posted"). Never "make it good" — that's unprovable and the loop will never end or will lie that it's done.
+1. **The Spec (the pin)** — what to build, what's explicitly OUT of scope, acceptance criteria. Stops the agent from inventing scope.
+2. **The Verifier (not the writer)** — the work is checked by something *other than* the agent that wrote it: tests, lint, typecheck, a screenshot review, a fresh-context skeptic agent. The writer never grades its own homework.
+3. **The Stop Condition (provable)** — a finish line the transcript can literally prove, plus a turn/time cap as the safety net. Never "make it good" — that's unprovable, and the loop will either never end or lie that it's done.
 
-If the user's request can't be given a provable stop condition yet, your FIRST job is to help them define one — don't hand back a vague loop.
+If the request can't be given a provable stop condition yet, your FIRST job is to help define one.
 
-## Audience note (this skill is given away to non-experts)
-Many users arrive from an Instagram giveaway and may be new to Claude Code, loops, or even coding. Meet them
-where they are: warm, plain-English, zero jargon unless you explain it. If someone just types "loop" with no
-detail, don't dump a form on them — say one friendly line ("Tell me what you're building and I'll write you a
-loop that runs it for you — even 'a landing page for my coffee shop' works"), then take whatever they give and
-help shape it into a checkable goal. Never make them feel dumb. The magic moment is them realizing they don't
-have to babysit the AI anymore.
+## Audience note
 
-## Your process when invoked
+Many users arrive from an Instagram giveaway and may be new to agents or coding. Warm, plain English, zero unexplained jargon. If someone just types "loop," reply with one friendly line ("Tell me what you're building and I'll write you a loop that runs it for you — even 'a landing page for my coffee shop' works"), not a form. The magic moment is realizing they don't have to babysit the AI anymore.
 
-### Step 1 — Interview (only what you don't already know)
-Ask, in plain English, only the gaps you can't infer:
-- **What are we building?** (one or two sentences)
-- **How do we KNOW it's done?** (push them toward something checkable — "tests pass", "the page renders and a screenshot looks right", "the script runs with no errors on the real input")
-- **What's OUT of scope?** (the #1 drift-preventer — get at least one thing)
-- **Where does it live?** (which folder / branch — so the loop is scoped and can't touch the rest of the codebase)
-- **Tests exist, or should the loop write them first?**
+## Step 0 — Pick the mode (infer it, don't ask)
 
-If they already told you enough, skip straight to building the loop. Don't interrogate.
+- **BUILD LOOP** — a feature, app, refactor, bug-hunt, migration, content batch: anything with a codebase or concrete deliverable. Uses `templates/BUILD-LOOP.md`.
+- **VENTURE RUN** — "build me a company/business/product from scratch": idea hunting through launch assets. Uses `templates/MISSION.md`.
 
-### Step 2 — Write the spec file
-Create `SPEC-<feature>.md` in their project using this exact shape:
+Only ask if genuinely ambiguous.
 
-```markdown
-## Feature: <name>
+## Step 1 — Interview (only the gaps, ONE question at a time)
 
-### Scope (build exactly this)
-- <thing 1>
-- <thing 2>
+Ask at most ~5 questions, **one at a time — wait for each answer before the next**. Never dump a numbered list of questions. Skip anything already known or inferable from the repo:
 
-### Out of Scope (do NOT touch — defer to later)
-- <explicitly excluded thing>
+1. **Where does it live?** Which folder/repo (and branch). The loop gets scoped there and can't touch anything else.
+2. **What are we building?** One or two sentences.
+3. **How do we PROVE it's done?** Push toward checkable: "tests pass," "the page renders on a phone and a screenshot confirms it," "the script exits 0 on the real input." For venture runs the stranger test is fine (see template).
+4. **What's OUT of scope?** The #1 drift-preventer — get at least one thing.
+5. **Which platform + budget?** Claude Code (default), Codex, or other. How long can it run / any model preference. Default: smartest model orchestrates, cheaper models do the work.
 
-### Acceptance Criteria (the loop is done when ALL are true)
-- [ ] <measurable, checkable requirement>
-- [ ] <measurable, checkable requirement>
+If they already told you enough, skip straight to building. Don't interrogate.
 
-### Guardrails
-- Only edit files under: <folder/>
-- Do NOT touch: secrets/.env, deploy config, production, or files outside scope
-- Run <test command> and <lint command> after every change
-- Update PROGRESS.md after each completed item
-```
+## Step 2 — Load the right ingredients
 
-### Step 3 — Set up verification (the part most people skip)
-Pick the lightest real verifier that fits:
-- **Code with tests** → the test command IS the verifier. If tests don't exist, the loop's first job is to write them from the acceptance criteria.
-- **UI / "looks good"** → screenshot gate: the loop must take a screenshot, review it, and only the reviewed-and-renamed (`verified_*.png`) screenshots count toward done. (Use the project's screenshot tooling, or Playwright.)
-- **A script / data job** → "runs on the real input with exit code 0 and the output matches <expected>".
-- **High-stakes (security, money, client-facing)** → add a second judge: a sub-agent whose only job is to try to REFUTE that the work is done/safe. Majority-refute = keep working.
+Before generating, read what applies:
 
-### Step 4 — Write the PROGRESS.md checkpoint
-So a long run survives context limits and can resume:
+- `references/orchestration-patterns.md` — ALWAYS. The delegation vocabulary (fan-out, tournaments, advocate/skeptic, adversarial verify, completeness critic, model-routing table) that goes into every master prompt.
+- `references/fable-method.md` — ALWAYS. The five-gate thinking discipline (scope, evidence, attack, verify, calibrated reporting) baked into every master prompt so any model runs with frontier judgment — plus the prompt-writing moves for authoring the master file itself.
+- `references/failure-modes.md` — ALWAYS. Every documented way overnight runs die, and the exact guardrail line that prevents each. Inject the relevant lines.
+- `references/james-defaults.md` — when working in James's workspace (MetaTech AI / EveryThingAI projects). House rules that get baked in automatically.
+- `references/run-commands.md` — at Step 4, for the platform-specific launch command.
 
-```markdown
-## Progress: <feature>
-### Completed
-### In Progress
-### Remaining
-- [ ] <every acceptance criterion, as a task>
-### Notes / blockers for the human
-```
+## Step 3 — Generate the scaffold into their project
 
-### Step 5 — Hand them the exact command to run
-Give them the real Claude Code command, matched to size:
+Create a `loop/` folder (or the repo root if they prefer) with these files, filled in from `templates/`:
 
-- **Built-in, simplest (recommended for most):**
-  ```
-  /goal Work through SPEC-<feature>.md until every acceptance criterion is checked off, tests pass, and lint is clean. Update PROGRESS.md after each item. Stay inside <folder/> only.
-  ```
-  `/goal` keeps Claude working turn after turn on its own; a separate small model checks after each turn whether the condition is met before handing control back. That separate-checker is your built-in verifier.
+| File | From template | What it is |
+|---|---|---|
+| `MISSION.md` **or** `BUILD-LOOP.md` | `templates/MISSION.md` / `templates/BUILD-LOOP.md` | The master prompt file — the agent's full instruction set. The launcher points here. |
+| `feature_list.json` | `templates/feature_list.template.json` | Build mode only: every feature with verify steps and `"passes": false`. JSON on purpose — agents are less likely to corrupt JSON than Markdown. |
+| `PROGRESS.md` | `templates/PROGRESS.md` | State on disk: progress log, decision log, honesty buckets (done/blocked/cut). Survives compaction and session death. |
+| `AGENTS.md` | `templates/AGENTS.template.md` | ≤60-line portable rules file at repo root: commands, conventions, Always/Never lists. If no `CLAUDE.md` exists, create one whose first line is `@AGENTS.md`; if one already exists, append `@AGENTS.md` on its own line — never overwrite it. |
+| `loop/LAUNCH.md` | `templates/LAUNCHER.md` | The short prompt they actually paste. Write it to `loop/LAUNCH.md` AND paste it in your reply. It points at the master file — this beats `/goal`'s 4,000-character limit. |
 
-- **For overnight / self-pacing:** `/loop` with the same instruction (it re-fires on a schedule and remembers state via PROGRESS.md).
+**Rules for filling templates:**
+- Every `{{PLACEHOLDER}}` gets a real value — or its line is deleted if not applicable. No `{{...}}` survives into the user's files.
+- The turn/time cap must be IDENTICAL in the launcher and the master file's hard stop. One number, two places.
+- Master prompts stay platform-neutral: state lives in markdown/JSON files, verification is shell commands with expected output, and never name a platform tool ("update the checkbox in PROGRESS.md," not "use TodoWrite").
+- Short beats long. Ralph's 103-word prompt outperformed his 1,500-word one. The master file earns length only from specifics (paths, commands, criteria), never from prose.
+- Every generated master prompt must pass the **non-negotiables checklist** below before you hand it over.
 
-- **For parallel work (advanced):** if the user wants 2-3 things built at once, put each in its own **git worktree** so the agents can't collide, run one `/goal` per worktree, and merge the verified branches in the morning. Recommend 3 parallel max — the human review is the bottleneck.
+## Step 4 — Hand them the launch command + safety briefing
 
-### Step 6 — The honest safety briefing (always include)
-Tell them, every time, in plain English:
-- The loop ships code they didn't write — **the morning review is not optional.** It amplifies their judgment, it doesn't replace it.
-- It's scoped to one folder/branch on purpose so a bad run can't damage the rest.
-- Nothing outward-facing (deploy, send, publish, secrets, prod) happens inside the loop without them.
-- Roughly budget-aware: a single agent runs ~$10/hr on Sonnet, so an 8-hour overnight run is real money — scope tight.
+Read `references/run-commands.md` and give the exact command for their platform (Claude Code `/goal` + auto mode is the default; headless `claude -p` for scripted/scheduled; Codex cloud task; generic loop for anything else).
+
+Then the safety briefing, every time, in plain English:
+1. **The morning review is not optional.** The loop ships work they didn't watch happen — it amplifies judgment, it doesn't replace it.
+2. It's scoped to one folder/branch on purpose, so a bad run can't damage the rest.
+3. Nothing outward-facing happens inside the loop: no deploy, publish, send, spend, or delete. Ever.
+4. Caps are set (turn/time limit + budget) so it can't run away.
+5. Rough budget: a single worker agent runs ~$10/hr on Sonnet at API prices; subscriptions absorb it — but overnight runs eat weekly limits, so scope tight.
+
+## Non-negotiables checklist (verify every master prompt against this)
+
+- [ ] Launcher → master-file pattern (no 4,000-char ceiling)
+- [ ] Orchestrator plans, delegates, reviews ONLY — workers build; model-routing table included
+- [ ] Never-ask clause WITH escape hatch: decide with research, log question + answer + why in PROGRESS.md, keep moving; if blocked try 3 approaches, then ship the strong 80% and note what got cut; blocked ≠ done (honesty buckets)
+- [ ] Verifier ≠ writer; evidence not assertions (show the test output / screenshot / API response, never just claim it)
+- [ ] Adversarial verification of important claims + completeness critic before any phase is called done
+- [ ] Source-of-truth verification: read the DB row / raw API response / file on disk — never trust a UI badge or the worker's own claim
+- [ ] One item per iteration; search-before-build; NO PLACEHOLDER IMPLEMENTATIONS; never edit or remove tests to make them pass
+- [ ] State on disk (feature list + PROGRESS.md), long output redirected to files and tailed, commit every green step
+- [ ] Stop condition = measurable contract + "or stop after N turns/hours" cap; time-anchored to real clock time for long runs
+- [ ] Definition of done ends in the stranger test (venture) or a shell-verifiable checklist (build)
+- [ ] Orchestration patterns listed explicitly and marked "a floor, not a ceiling"
 
 ## Output format
-When done, give the user:
-1. The spec file (created in their project)
-2. The PROGRESS.md (created)
-3. The verifier setup (what checks the work, and how)
-4. **The one command to paste** to start the loop
-5. The 4-line safety briefing
 
-Keep it tight and confident. They should be able to copy one command and walk away.
+When done, give the user:
+1. The files created (master prompt, feature list/arc, PROGRESS.md, AGENTS.md) — with paths
+2. What the verifier is and how it checks the work
+3. **The one launcher command to paste** — then they walk away
+4. The 5-line safety briefing
+
+Keep it tight and confident. One command, then sleep.
 
 ## Plain-English north star
-"You're not babysitting the agent anymore. You wrote down what 'done' means, how it gets checked, and where it's allowed to work — now the loop runs itself until it's actually done. That's the whole trick."
+
+"You're not babysitting the agent anymore. You wrote down what 'done' means, how it gets checked, where it's allowed to work, and what to do when it hits a wall — now the loop runs itself until it's actually done. That's the whole trick."
