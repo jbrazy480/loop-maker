@@ -33,19 +33,21 @@ If invoked bare (`/loop-maker` or just "loop" with no details), don't dump instr
 - **BUILD LOOP** — a big overnight build that needs state on disk: many features, multi-hour, resumable. Uses `templates/BUILD-LOOP.md` + the full scaffold.
 - **VENTURE RUN** — "build me a company/business/product from scratch": idea hunting through launch assets. Uses `templates/MISSION.md` + scaffold.
 
-Rule of thumb: conversation about features → PROMPT. "Run all night / don't stop until every item ships" with a real repo → BUILD LOOP (or offer to upgrade the PROMPT into a scaffold). Only ask if genuinely ambiguous. In PROMPT mode the back-and-forth IS the product: keep asking one question at a time until you could build it yourself without guessing — what, where, how proven, what's out — then write the prompt.
+Rule of thumb: conversation about features → PROMPT. "Run all night / don't stop until every item ships" with a real repo → BUILD LOOP (or offer to upgrade the PROMPT into a scaffold). Only ask if genuinely ambiguous.
 
-## Step 1 — Interview (only the gaps, ONE question at a time)
+## Step 1 — The Mission Briefing (draft first — never a form)
 
-Ask at most ~5 questions, **one at a time — wait for each answer before the next**. Never dump a numbered list of questions. Skip anything already known or inferable from the repo:
+This is the signature move. People hate being interviewed; they love watching their idea get sharper. So:
 
-1. **Where does it live?** Which folder/repo (and branch). The loop gets scoped there and can't touch anything else.
-2. **What are we building?** One or two sentences.
-3. **How do we PROVE it's done?** Push toward checkable: "tests pass," "the page renders on a phone and a screenshot confirms it," "the script exits 0 on the real input." For venture runs the stranger test is fine (see template).
-4. **What's OUT of scope?** The #1 drift-preventer — get at least one thing.
-5. **Which platform + budget?** Claude Code (default), Codex, or other. How long can it run / any model preference. Default: smartest model orchestrates, cheaper models do the work.
+1. **Silent recon first — no questions.** If there's a repo, look before you ask: folder structure, the stack (package.json etc.), existing UI components and styles, CLAUDE.md/AGENTS.md, test commands. Never ask anything recon could answer. "I see you're on Next.js + Supabase with a `reports/` page — I'll match that" feels psychic; "what's your stack?" feels like a form.
+2. **Draft v1 immediately** from whatever they said — even one messy sentence. Fill every gap with a researched default, never a blank.
+3. **Score it out loud.** Show **Mission Strength: x/10** against five checks, one line each (✓ or what's missing): Scope pinned · Done is provable · Verifier isn't the writer · Quality bar matches the work · Stuck-plan set (what it does when blocked).
+4. **Ask ONE question** — the single highest-leverage gap. Wait for the answer. Fold it in, show the score climb, ask the next.
+5. **Hard cap: 3 questions.** And if they say "just send it" at any point, ship the best current draft immediately with your remaining assumptions written INTO the prompt's decision log. Never block on politeness.
 
-If they already told you enough, skip straight to building. Don't interrogate.
+The draft must end up pinning: what we're building · where it lives (folder/branch) · how it's PROVEN done (checkable, not "works well") · at least one thing OUT of scope · platform + how long it can run (default: smartest model orchestrates, cheaper models build).
+
+At 10/10 — or "send it" — deliver the Mission Card.
 
 ## Step 2 — Load the right ingredients
 
@@ -105,7 +107,14 @@ Then the safety briefing, every time, in plain English:
 
 ## Output format
 
-**PROMPT mode:** the finished mission prompt in one clean copy-paste block · one line on where to run it · one line on when to come back. That's it — no file inventory, no lecture.
+**PROMPT mode — deliver a Mission Card:**
+1. **Codename** — two fun, thematic words ("Operation Night Owl", "Operation Clean Sweep") + one line on what ships + an honest run-length estimate
+2. **Mission Strength: 10/10** (or the score at "send it," with what's still assumed)
+3. The finished mission prompt in **one clean copy-paste block**
+4. **Launch:** exactly where to put it (`/goal` + prompt in Claude Code; pasted directly anywhere else)
+5. Sign off: **"See you in the morning. 🌙"** (overnight) or **"Go get it. ⚡"** (day runs)
+
+No file inventory, no lecture. The card should feel like being handed the keys.
 
 **BUILD LOOP / VENTURE mode:**
 1. The files created (master prompt, feature list/arc, PROGRESS.md, AGENTS.md) — with paths

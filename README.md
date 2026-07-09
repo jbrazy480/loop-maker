@@ -54,7 +54,9 @@ One file, [`commands/loop-maker.md`](commands/loop-maker.md), works everywhere. 
 | **Cursor** | `.cursor/commands/loop-maker.md` | `/loop-maker` |
 | **Antigravity / anything else** | anywhere in the repo | "Read commands/loop-maker.md and follow it" |
 
-Then just talk to it: `/loop-maker I want to add 3 features to my app — build all of them, test everything end to end, and don't stop until it's done.` It interviews you, then hands you the perfect prompt.
+Then just talk to it: `/loop-maker I want to add 3 features to my app — build all of them, test everything end to end, and don't stop until it's done.`
+
+**How it feels:** it scans your repo first (so it never asks what it can see), writes a draft mission prompt instantly from whatever you said, and scores it — **Mission Strength: 7/10** — then asks you ONE question at a time (three max) and you watch the score climb. Say "just send it" anytime and it ships the draft with its assumptions logged. At 10/10 you get a **Mission Card**: codename, run-length estimate, the perfect prompt in one copy block, and the launch line. *See you in the morning.* 🌙
 
 ## The method (what makes the runs actually finish)
 
