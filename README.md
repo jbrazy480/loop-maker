@@ -11,7 +11,7 @@ Tell it what you want in plain English. It writes the whole run: master prompt, 
 [![Works With](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20Antigravity-3b82f6?style=for-the-badge)](#-install-in-60-seconds)
 [![Community](https://img.shields.io/badge/community-Evolving%20AI%20Hub-f97316?style=for-the-badge)](https://www.skool.com/evolving-ai-hub)
 
-**⭐ Star this repo** if your AI ships while you sleep · Built by [James @ EveryThingAI](https://evrythingai.com)
+**⭐ Star this repo** if your AI ships while you sleep · Built by [AI Guy Official](https://aiguyofficial.com)
 
 </div>
 
@@ -83,8 +83,8 @@ The full playbook lives in [`loop-maker/references/`](loop-maker/references/): [
 **[Join Evolving AI Hub on Skool](https://www.skool.com/evolving-ai-hub)** — the community where we drop every skill, prompt system, and build like this one, free.
 
 **Want this level of AI systems installed across your whole business?**
-That's literally what we do — [**evrythingai.com**](https://evrythingai.com)
+That's literally what we do — [**aiguyofficial.com**](https://aiguyofficial.com)
 
-*Loop Maker by James @ EveryThingAI · MIT License · PRs welcome*
+*Loop Maker by [AI Guy Official](https://aiguyofficial.com) · MIT License · PRs welcome*
 
 </div>

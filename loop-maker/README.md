@@ -6,7 +6,7 @@ This is a free skill for Claude Code (and it works with Codex, Cursor, and other
 
 Built on the loop-engineering playbook: Anthropic's own long-running-agent research, the Ralph Wiggum loop, and the plan-delegate-review method (the smart model manages, cheaper models build — that's how a whole company costs ~500K orchestrator tokens instead of millions).
 
-Made by James (@ EveryThingAI). If you got this from my Instagram — enjoy. 🙏
+Made by James (AI Guy Official — https://aiguyofficial.com). If you got this from my Instagram — enjoy. 🙏
 
 ---
 
@@ -76,4 +76,4 @@ Plus the rules the pros converged on: never ask the human (decide, log it, keep 
 
 🎓 **Join Evolving AI Hub on Skool** for every skill and prompt system we drop: **https://www.skool.com/evolving-ai-hub**
 
-Want the system that runs your whole business this way (not just code)? → **evrythingai.com**
+Want the system that runs your whole business this way (not just code)? → **aiguyofficial.com**
