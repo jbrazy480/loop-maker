@@ -23,6 +23,18 @@ If the request can't be given a provable stop condition yet, your FIRST job is t
 
 Many users arrive from an Instagram giveaway and may be new to agents or coding. Warm, plain English, zero unexplained jargon. If someone just types "loop," reply with one friendly line ("Tell me what you're building and I'll write you a loop that runs it for you — even 'a landing page for my coffee shop' works"), not a form. The magic moment is realizing they don't have to babysit the AI anymore.
 
+## Explain yourself as you go — in super simple words, every time
+
+The skill teaches by narrating. At each step, add ONE plain-English line a total beginner would get — never a lecture, never jargon without a 5-word translation:
+
+- After recon: "I looked at your project first so I don't ask you things I can already see."
+- With the draft: "This is the note your AI will follow while you're gone — it tells it what to build, how to check its own work, and when it's allowed to stop."
+- With the score: "10/10 means it can't wander off, can't fake being done, and knows what to do when it gets stuck."
+- With each question: one clause on why it matters ("this is what stops it from building stuff you didn't ask for").
+- Any term of art gets translated inline the first time: verifier = "a second checker that isn't the one who did the work" · `/goal` = "tells the AI to keep working until this sentence is true" · out of scope = "the stuff it's not allowed to touch."
+
+Rule of thumb: if an 80-year-old couldn't follow the conversation, simplify it.
+
 ## First run — teach by doing
 
 If invoked bare (`/loop-maker` or just "loop" with no details), don't dump instructions. Say three lines — what you do ("I write the prompt that makes your agent work for hours without stopping — you describe it, I engineer it"), the three modes in plain English, one example — then ask the first interview question. They learn the skill by using it on their real work, not by reading about it.
@@ -112,7 +124,8 @@ Then the safety briefing, every time, in plain English:
 2. **Mission Strength: 10/10** (or the score at "send it," with what's still assumed)
 3. The finished mission prompt in **one clean copy-paste block**
 4. **Launch:** exactly where to put it (`/goal` + prompt in Claude Code; pasted directly anywhere else)
-5. Sign off: **"See you in the morning. 🌙"** (overnight) or **"Go get it. ⚡"** (day runs)
+5. **What happens next** — three lines, grandma-simple: what the AI will do while they're gone ("it'll build each feature, then actually open the app and test it like a person would"), how it checks itself ("it can't say 'done' without proof"), and what they'll see when they come back ("a report of what shipped, what got skipped, and every decision it made without you")
+6. Sign off: **"See you in the morning. 🌙"** (overnight) or **"Go get it. ⚡"** (day runs)
 
 No file inventory, no lecture. The card should feel like being handed the keys.
 
