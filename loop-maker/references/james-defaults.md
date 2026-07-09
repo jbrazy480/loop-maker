@@ -1,6 +1,6 @@
 # James's house rules (auto-inject when working in James's workspace)
 
-When Loop Maker runs inside James's projects (MetaTech AI / EveryThingAI / RizzDial / FounderOS / client work), bake these into every generated master prompt and AGENTS.md without being asked. For giveaway users, these are a good default "Conventions" starting point too.
+When Loop Maker runs inside James's projects (MetaTech AI / AI Guy Official / RizzDial / FounderOS / client work), bake these into every generated master prompt and AGENTS.md without being asked. For giveaway users, these are a good default "Conventions" starting point too.
 
 ## Product & UI
 - **Research before you decide.** Every meaningful choice starts with real research; log it in the Decision Log.

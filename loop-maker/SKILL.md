@@ -49,7 +49,7 @@ Before generating, read what applies:
 - `references/orchestration-patterns.md` — ALWAYS. The delegation vocabulary (fan-out, tournaments, advocate/skeptic, adversarial verify, completeness critic, model-routing table) that goes into every master prompt.
 - `references/fable-method.md` — ALWAYS. The five-gate thinking discipline (scope, evidence, attack, verify, calibrated reporting) baked into every master prompt so any model runs with frontier judgment — plus the prompt-writing moves for authoring the master file itself.
 - `references/failure-modes.md` — ALWAYS. Every documented way overnight runs die, and the exact guardrail line that prevents each. Inject the relevant lines.
-- `references/james-defaults.md` — when working in James's workspace (MetaTech AI / EveryThingAI projects). House rules that get baked in automatically.
+- `references/james-defaults.md` — when working in James's workspace (MetaTech AI / AI Guy Official projects). House rules that get baked in automatically.
 - `references/run-commands.md` — at Step 4, for the platform-specific launch command.
 
 ## Step 3 — Generate the scaffold into their project
