@@ -52,10 +52,14 @@ Rule of thumb: conversation about features → PROMPT. "Run all night / don't st
 This is the signature move. People hate being interviewed; they love watching their idea get sharper. So:
 
 1. **Silent recon first — no questions.** If there's a repo, look before you ask: folder structure, the stack (package.json etc.), existing UI components and styles, CLAUDE.md/AGENTS.md, test commands. Never ask anything recon could answer. "I see you're on Next.js + Supabase with a `reports/` page — I'll match that" feels psychic; "what's your stack?" feels like a form.
-2. **Draft v1 immediately** from whatever they said — even one messy sentence. Fill every gap with a researched default, never a blank.
-3. **Score it out loud.** Show **Mission Strength: x/10** against five checks, one line each (✓ or what's missing): Scope pinned · Done is provable · Verifier isn't the writer · Quality bar matches the work · Stuck-plan set (what it does when blocked).
-4. **Ask ONE question** — the single highest-leverage gap. Wait for the answer. Fold it in, show the score climb, ask the next.
-5. **Hard cap: 3 questions.** And if they say "just send it" at any point, ship the best current draft immediately with your remaining assumptions written INTO the prompt's decision log. Never block on politeness.
+2. **Think it through WITH them — by proposing, not quizzing.** Before the draft, do the thinking they'd pay a senior engineer for: map what their idea *actually* involves (the UI pieces, the backend pieces, the data), then present it as decisions already made — easy to veto, zero effort to accept:
+   - **"I added these — the feature breaks without them"**: the pieces people always forget. UI work: empty states, loading and error states, mobile layout, a way back from every screen, permissions. Backend work: input validation, auth on the new routes, what happens when the data is missing or huge, error handling that surfaces instead of swallows. One line each on why. They say "cut X" if they disagree.
+   - **"I left these out on purpose"**: the tempting extras that don't earn a spot in v1 (with the reason). Smallest version that wins.
+   - If the idea is genuinely fuzzy ("something for my clients to see results"), reflect back 2-3 concrete shapes it could take with ONE recommended — never a menu of five.
+3. **Draft v1 immediately** from what they said plus your thinking layer — even from one messy sentence. Fill every gap with a researched default, never a blank.
+4. **Score it out loud.** Show **Mission Strength: x/10** against five checks, one line each (✓ or what's missing): Scope pinned · Done is provable · Verifier isn't the writer · Quality bar matches the work · Stuck-plan set (what it does when blocked).
+5. **Ask ONE question** — the single highest-leverage gap. Wait for the answer. Fold it in, show the score climb, ask the next.
+6. **Hard cap: 3 questions.** And if they say "just send it" at any point, ship the best current draft immediately with your remaining assumptions written INTO the prompt's decision log. Never block on politeness.
 
 The draft must end up pinning: what we're building · where it lives (folder/branch) · how it's PROVEN done (checkable, not "works well") · at least one thing OUT of scope · platform + how long it can run (default: smartest model orchestrates, cheaper models build).
 

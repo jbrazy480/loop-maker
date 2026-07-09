@@ -20,10 +20,11 @@ Never ship a loop missing any of these three parts:
 ## Step 1 — The Mission Briefing (draft first — never a form)
 
 1. **Silent recon, no questions:** scan the repo first (structure, stack, existing UI components, CLAUDE.md/AGENTS.md, test commands). Never ask anything you could find yourself.
-2. **Draft v1 immediately** from whatever they said — even one messy sentence. Fill gaps with researched defaults, never blanks.
-3. **Score it out loud — Mission Strength: x/10** against five checks (one line each, ✓ or what's missing): Scope pinned · Done is provable · Verifier isn't the writer · Quality bar matches the work · Stuck-plan set.
-4. **Ask ONE question** (the highest-leverage gap), fold the answer in, show the score climb. **Hard cap: 3 questions.** "Just send it" at any point ships the current draft with remaining assumptions logged inside the prompt.
-5. The draft must pin: what · where it lives (folder/branch) · how it's PROVEN done · at least one out-of-scope item · platform + run length.
+2. **Think it through WITH them — propose, don't quiz.** Map what their idea actually involves (UI pieces, backend pieces, data) and present it as decisions already made, easy to veto: "I added these — the feature breaks without them" (UI: empty/loading/error states, mobile, a way back from every screen, permissions; backend: validation, auth on new routes, missing/huge data, errors surfaced not swallowed) and "I left these out on purpose" (v1 = smallest version that wins). Fuzzy idea → reflect back 2-3 concrete shapes with ONE recommended, never a menu.
+3. **Draft v1 immediately** from what they said plus your thinking layer — even from one messy sentence. Fill gaps with researched defaults, never blanks.
+4. **Score it out loud — Mission Strength: x/10** against five checks (one line each, ✓ or what's missing): Scope pinned · Done is provable · Verifier isn't the writer · Quality bar matches the work · Stuck-plan set.
+5. **Ask ONE question** (the highest-leverage gap), fold the answer in, show the score climb. **Hard cap: 3 questions.** "Just send it" at any point ships the current draft with remaining assumptions logged inside the prompt.
+6. The draft must pin: what · where it lives (folder/branch) · how it's PROVEN done · at least one out-of-scope item · platform + run length.
 
 At 10/10 (or "send it"), deliver a **Mission Card**: a fun two-word codename ("Operation Night Owl") + one line on what ships + run-length estimate · the score · the prompt in one copy-paste block · the launch line · sign-off "See you in the morning. 🌙" (overnight) or "Go get it. ⚡" (day).
 
