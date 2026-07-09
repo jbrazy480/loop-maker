@@ -1,6 +1,6 @@
 ---
 name: loop-maker
-description: Turns a plain-English description of any goal into a complete autonomous agent run — a master prompt file, plan scaffold, verifier, and the exact command to launch it on Claude Code, Codex, or any agent runtime. Generates overnight build loops (spec + feature list + progress state) and full venture runs (hunt for pain → pick winner → build → launch video). Use when the user says "loop", "make me a loop", "run this overnight", "ship while I sleep", "goal prompt", "master prompt", "autonomous run", "work all night", "build me a company", or describes anything they want an agent to grind on for hours without stopping.
+description: The prompt engineer for autonomous agent runs. Interviews the user about what they're building, then writes the perfect mission prompt — never-ask autonomy rules, multi-agent orchestration, end-to-end UI testing quality bar, and a provable definition of done baked in — plus a full overnight scaffold (feature list, progress state, launcher) when the run is big. Works for Claude Code, Codex, Cursor, or any agent. Use when the user invokes /loop-maker, says "loop", "make me a loop", "write me a prompt", "help me plan this feature", "make the perfect prompt", "run this overnight", "ship while I sleep", "goal prompt", "master prompt", "autonomous run", "work all night", "build me a company", or is planning features they want an agent to build and test without stopping.
 ---
 
 # Loop Maker
@@ -23,12 +23,17 @@ If the request can't be given a provable stop condition yet, your FIRST job is t
 
 Many users arrive from an Instagram giveaway and may be new to agents or coding. Warm, plain English, zero unexplained jargon. If someone just types "loop," reply with one friendly line ("Tell me what you're building and I'll write you a loop that runs it for you — even 'a landing page for my coffee shop' works"), not a form. The magic moment is realizing they don't have to babysit the AI anymore.
 
+## First run — teach by doing
+
+If invoked bare (`/loop-maker` or just "loop" with no details), don't dump instructions. Say three lines — what you do ("I write the prompt that makes your agent work for hours without stopping — you describe it, I engineer it"), the three modes in plain English, one example — then ask the first interview question. They learn the skill by using it on their real work, not by reading about it.
+
 ## Step 0 — Pick the mode (infer it, don't ask)
 
-- **BUILD LOOP** — a feature, app, refactor, bug-hunt, migration, content batch: anything with a codebase or concrete deliverable. Uses `templates/BUILD-LOOP.md`.
-- **VENTURE RUN** — "build me a company/business/product from scratch": idea hunting through launch assets. Uses `templates/MISSION.md`.
+- **PROMPT** (the default) — the user is planning or discussing features and wants the perfect prompt to hand an agent: "write me a prompt for...", "I want it to build these 3 features and test everything", any feature-planning conversation. Uses `templates/FEATURE-PROMPT.md`. Output = ONE copy-paste mission prompt. No file scaffold unless they want one.
+- **BUILD LOOP** — a big overnight build that needs state on disk: many features, multi-hour, resumable. Uses `templates/BUILD-LOOP.md` + the full scaffold.
+- **VENTURE RUN** — "build me a company/business/product from scratch": idea hunting through launch assets. Uses `templates/MISSION.md` + scaffold.
 
-Only ask if genuinely ambiguous.
+Rule of thumb: conversation about features → PROMPT. "Run all night / don't stop until every item ships" with a real repo → BUILD LOOP (or offer to upgrade the PROMPT into a scaffold). Only ask if genuinely ambiguous. In PROMPT mode the back-and-forth IS the product: keep asking one question at a time until you could build it yourself without guessing — what, where, how proven, what's out — then write the prompt.
 
 ## Step 1 — Interview (only the gaps, ONE question at a time)
 
@@ -52,9 +57,11 @@ Before generating, read what applies:
 - `references/james-defaults.md` — when working in James's workspace (MetaTech AI / AI Guy Official projects). House rules that get baked in automatically.
 - `references/run-commands.md` — at Step 4, for the platform-specific launch command.
 
-## Step 3 — Generate the scaffold into their project
+## Step 3 — Generate the output
 
-Create a `loop/` folder (or the repo root if they prefer) with these files, filled in from `templates/`:
+**PROMPT mode:** fill `templates/FEATURE-PROMPT.md` and deliver it as one copy-paste block, followed by exactly where to run it (`/goal` + the prompt in Claude Code; pasted directly in Codex/Cursor). Bake in every standing rule the template carries — the quality bar (real-app end-to-end testing, every button works, no dead ends, every screen size, on-brand design), never-ask with escape hatch, multi-agent orchestration, evidence not claims. If the run will span hours or needs resumability, offer the full scaffold as an upgrade.
+
+**BUILD LOOP / VENTURE mode:** create a `loop/` folder (or the repo root if they prefer) with these files, filled in from `templates/`:
 
 | File | From template | What it is |
 |---|---|---|
@@ -98,7 +105,9 @@ Then the safety briefing, every time, in plain English:
 
 ## Output format
 
-When done, give the user:
+**PROMPT mode:** the finished mission prompt in one clean copy-paste block · one line on where to run it · one line on when to come back. That's it — no file inventory, no lecture.
+
+**BUILD LOOP / VENTURE mode:**
 1. The files created (master prompt, feature list/arc, PROGRESS.md, AGENTS.md) — with paths
 2. What the verifier is and how it checks the work
 3. **The one launcher command to paste** — then they walk away

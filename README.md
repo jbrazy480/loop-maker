@@ -45,14 +45,16 @@ Type `loop`, answer a few questions (one at a time), and it generates:
 Drop the [`loop-maker/`](loop-maker/) folder into `~/.claude/skills/`, restart Claude Code, then type **`loop`** + what you want. Full instructions: [loop-maker/README.md](loop-maker/README.md)
 
 ### Slash command (Claude Code · Codex · Cursor · Antigravity)
-One file, [`commands/loop.md`](commands/loop.md), works everywhere:
+One file, [`commands/loop-maker.md`](commands/loop-maker.md), works everywhere. **The command is `/loop-maker`** (not `/loop` — Claude Code already has a built-in `/loop`):
 
 | Agent | Put it here | Then type |
 |---|---|---|
-| **Claude Code** | `~/.claude/commands/loop.md` | `/loop` |
-| **Codex CLI** | `~/.codex/prompts/loop.md` | `/loop` |
-| **Cursor** | `.cursor/commands/loop.md` | `/loop` |
-| **Antigravity / anything else** | anywhere in the repo | "Read commands/loop.md and follow it" |
+| **Claude Code** | `~/.claude/commands/loop-maker.md` | `/loop-maker` |
+| **Codex CLI** | `~/.codex/prompts/loop-maker.md` | `/loop-maker` |
+| **Cursor** | `.cursor/commands/loop-maker.md` | `/loop-maker` |
+| **Antigravity / anything else** | anywhere in the repo | "Read commands/loop-maker.md and follow it" |
+
+Then just talk to it: `/loop-maker I want to add 3 features to my app — build all of them, test everything end to end, and don't stop until it's done.` It interviews you, then hands you the perfect prompt.
 
 ## The method (what makes the runs actually finish)
 
